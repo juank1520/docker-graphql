@@ -41,6 +41,8 @@ jobs:
         docker build -t juank1520/docker-graphql:latest .
     
     - name: Push Docker image
+      env:
+        NEW_VERSION: ${{ steps.semantic-version.outputs.version }}
       run: |
         docker push juank1520/docker-graphql:$NEW_VERSION
         docker push juank1520/docker-graphql:latest
