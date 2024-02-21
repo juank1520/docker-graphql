@@ -49,7 +49,6 @@ jobs:
         docker push juank1520/docker-graphql:latest
 
       
-
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
