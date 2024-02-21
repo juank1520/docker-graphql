@@ -1,7 +1,7 @@
 
 FROM node:19-alpine3.15 as dev-deps
 WORKDIR /app
-COPY package.json package.json
+COPY package.json package-lock.json ./
 RUN npm ci
 
 
@@ -14,7 +14,7 @@ RUN npm run build
 
 FROM node:19-alpine3.15 as prod-deps
 WORKDIR /app
-COPY package.json package.json
+COPY package.json package-lock.json ./
 RUN npm ci --production
 
 
