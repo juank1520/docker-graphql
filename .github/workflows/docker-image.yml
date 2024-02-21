@@ -24,15 +24,26 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
+    - name: Generate semantic version
+      id: semantic-version
+      uses: paulhatch/semantic-version@v4.0.3
+      with:
+        major_pattern: "major: "
+        minor_pattern: "feat: "
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
+
     - name: Build Docker image
+      env:
+        NEW_VERSION: ${{ steps.semantic-version.outputs.version }}
       run: |
-        docker build -t juank1520/docker-graphql:0.0.2 .
+        docker build -t juank1520/docker-graphql:$NEW_VERSION .
         docker build -t juank1520/docker-graphql:latest .
     
     - name: Push Docker image
       run: |
-        docker push juank1520/docker-graphql:0.0.2
+        docker push juank1520/docker-graphql:$NEW_VERSION
         docker push juank1520/docker-graphql:latest
+
       
 
     # - name: Build the Docker image
