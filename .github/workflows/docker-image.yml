@@ -44,6 +44,7 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.semantic-version.outputs.version }}
       run: |
+        echo "Version: $NEW_VERSION"
         docker push juank1520/docker-graphql:$NEW_VERSION
         docker push juank1520/docker-graphql:latest
 
